@@ -1,0 +1,67 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.0.BUILD-SNAPSHOT'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+
+
+group = 'com.cnb'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+
+task bootFullApplication(type: GradleBuild) {
+	group 'application'
+	setTasks([':webapp:npmUpdate', ':webapp:clean', ':webapp:buildWebappToSpring', ':bootRun'])
+}
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/snapshot' }
+	maven { url 'https://repo.spring.io/milestone' }
+	jcenter()
+}
+
+dependencies {
+	compile("io.github.openfeign:feign-slf4j:9.5.0")
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.session:spring-session-core'
+	implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.3.1.Final'
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.9.4'
+	compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
+	compile 'org.codehaus.jackson:jackson-core-asl:1.9.13'
+	compileOnly 'org.projectlombok:lombok:1.16.16'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	//runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+	compile('mysql:mysql-connector-java:8.0.11')
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+		exclude group: 'junit', module: 'junit'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
