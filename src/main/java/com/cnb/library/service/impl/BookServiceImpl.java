@@ -32,18 +32,18 @@ public class BookServiceImpl implements BookService {
 
    public Book addBook(Book books){
 
-        Book book = Book.builder()
-                .ISBN("12A")
-                .name("Last Leave")
-                .authorFirstName("surabhi")
-                .authorLastName("sharma")
-                .status(Status.AVAILABLE)
-                .shelfNum("A")
-                .rowNum("1")
-                .columnNum("1")
-                .build();
+//        Book book = Book.builder()
+//                .ISBN("12A")
+//                .name("Last Leave")
+//                .authorFirstName("surabhi")
+//                .authorLastName("sharma")
+//                .status(Status.AVAILABLE)
+//                .shelfNum("A")
+//                .rowNum("1")
+//                .columnNum("1")
+//                .build();
 
-        return bookrepo.save(book);
+        return bookrepo.save(books);
 
 
    }
