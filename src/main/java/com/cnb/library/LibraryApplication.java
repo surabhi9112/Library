@@ -23,7 +23,7 @@ public class LibraryApplication {
 
     }
 
-    @Bean
+   /* @Bean
     CommandLineRunner runner(BookService bookService) {
         return args -> {
             // read json and write to db
@@ -39,7 +39,7 @@ public class LibraryApplication {
                 System.out.println("Unable to save books: " + e.getMessage());
             }
         };
-    }
+    }*/
 
 
 

@@ -3,13 +3,11 @@ package com.cnb.library.service.impl;
 
 import com.cnb.library.model.Book;
 import com.cnb.library.model.Status;
-import com.cnb.library.repo.Authorrepo;
 import com.cnb.library.repo.Bookrepo;
 import com.cnb.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,14 +15,12 @@ public class BookServiceImpl implements BookService {
 
     private Bookrepo bookrepo;
 
-    private Authorrepo authorrepo;
-
-
 
     @Autowired
-    public BookServiceImpl(Bookrepo bookrepo, Authorrepo authorrepo){
+    public BookServiceImpl(Bookrepo bookrepo){
         this.bookrepo=bookrepo;
-        this.authorrepo=authorrepo;
+
+
 
     }
 
@@ -38,10 +34,13 @@ public class BookServiceImpl implements BookService {
 
         Book book = Book.builder()
                 .ISBN("12A")
-               .name("Last Leave")
-               .authorFirstName("surabhi")
+                .name("Last Leave")
+                .authorFirstName("surabhi")
                 .authorLastName("sharma")
                 .status(Status.AVAILABLE)
+                .shelfNum("A")
+                .rowNum("1")
+                .columnNum("1")
                 .build();
 
         return bookrepo.save(book);
@@ -56,7 +55,7 @@ public class BookServiceImpl implements BookService {
         book.setName("ram");
         book.setAuthorFirstName("Amish");
         book.setAuthorLastName("Tripathi");
-         book.setStatus(Status.ISSUED);
+        book.setStatus(Status.ISSUED);
 
         return bookrepo.save(book);
 
@@ -69,7 +68,18 @@ public class BookServiceImpl implements BookService {
     }
 
     public void removeBook(long id){
+
         bookrepo.deleteById(id);
     }
+
+    public String findBookLocation(String id){
+
+        Book book = bookrepo.findBookLocation(id);
+        return book.getShelfNum();
+
+    }
+
+
+
 
 }
