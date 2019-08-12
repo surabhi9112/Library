@@ -8,6 +8,7 @@ import com.cnb.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
@@ -51,19 +52,21 @@ public class BookServiceImpl implements BookService {
    public Book update( Long id){
 
         Book book = findBookById(id);
-        book.setISBN("ijj8");
-        book.setName("ram");
-        book.setAuthorFirstName("Amish");
-        book.setAuthorLastName("Tripathi");
-        book.setStatus(Status.ISSUED);
-
-        return bookrepo.save(book);
+        book.setAuthorLastName("adf");
+       return bookrepo.save(book);
 
     }
 
     public Book findBookById(Long id){
-        Optional<Book>  book = bookrepo.findById(id);
+
+
+        Optional<Book> book = bookrepo.findById(id);
+
+        if (!book.isPresent())
+            throw new EntityNotFoundException("Book with id : " + id + " does not exist");
+
         return book.get();
+
 
     }
 
@@ -72,12 +75,13 @@ public class BookServiceImpl implements BookService {
         bookrepo.deleteById(id);
     }
 
-    public String findBookLocation(String id){
-
-        Book book = bookrepo.findBookLocation(id);
+    public Long findBookLocation(Long id){
+        Book book = findBookById(id);
         return book.getShelfNum();
 
-    }
+   }
+
+
 
 
 

@@ -4,9 +4,8 @@ import com.cnb.library.dto.BookDTO;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-
 import javax.persistence.*;
+import java.security.acl.LastOwnerException;
 
 @Entity
 @NoArgsConstructor
@@ -21,11 +20,11 @@ public class Book {
     private String authorFirstName;
     private String authorLastName;
 
-    private String shelfNum;
+    private Long shelfNum;
 
-    private String rowNum;
+    private Long rowNum;
 
-    private String columnNum;
+    private Long columnNum;
 
 //    @ManyToOne
 //    @JoinColumn(name = "author_id")
@@ -35,7 +34,7 @@ public class Book {
 
 
     @Builder
-    public Book(String ISBN, String name, String authorFirstName, String authorLastName, Status status, String shelfNum, String rowNum, String columnNum) {
+    public Book(String ISBN, String name, String authorFirstName, String authorLastName, Status status, Long shelfNum, Long rowNum, Long columnNum) {
         this.ISBN = ISBN;
         this.name = name;
         this.authorFirstName = authorFirstName;
@@ -46,5 +45,9 @@ public class Book {
         this.columnNum = columnNum;
 
 
+    }
+
+    public Book(Long shelfNum){
+        this.shelfNum= shelfNum;
     }
 }

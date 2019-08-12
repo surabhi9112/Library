@@ -12,7 +12,7 @@ Book update(Long id);
 
 void removeBook(long id);
 
-String findBookLocation(String id);
+Long findBookLocation(Long id);
 
 
 
