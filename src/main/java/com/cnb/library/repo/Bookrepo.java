@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface Bookrepo extends CrudRepository<Book, Long> {
 
-    @Query(value = "SELECT  shelf_num FROM Book " , nativeQuery = true)
-    Long findBookLocation ();
+    @Query(value = "SELECT  shelf_num FROM Book where id: id" , nativeQuery = true)
+    Book findBookLocation (@Param("id") Long id);
 }

@@ -1,27 +1,38 @@
 package com.cnb.library.model;
 
-
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity
+
 @Data
 @NoArgsConstructor
+@Entity
+
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String shelfNum;
+    private Long shelfNum;
+    private Long rowNum;
+    private Long columnNum;
 
-    private String rowNum;
+    @OneToOne(mappedBy = "location")
+    private Book book;
 
-    private String columnNum;
+
+    @Builder
+
+    public Location( Long shelfNum, Long rowNum, Long columnNum, Book book) {
+        this.shelfNum=shelfNum;
+        this.rowNum=rowNum;
+        this.columnNum=columnNum;
+        this.book=book;
+
+    }
 
 
 }

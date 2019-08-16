@@ -1,12 +1,15 @@
-{
-  "id": 1,
-  "isbn":"12jh",
-  "name": "Henry Smith",
-  "authorFirstName": "surabhi",
-  "authorLastName": "Sharma",
-  "status":"AVAILABLE",
-  "shelfNum": "1",
-  "rowNum": "11",
-  "columnNum":"10"
 
-}
+  {
+    "id": 1,
+    "isbn": "12jh",
+    "name": "Henry Smith",
+    "authorFirstName": "surabhi",
+    "authorLastName": "Sharma",
+    "status": "AVAILABLE",
+    "location": {
+      "id": 1
+    }
+  }
+
+
+
