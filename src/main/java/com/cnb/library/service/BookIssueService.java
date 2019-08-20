@@ -8,4 +8,6 @@ public interface BookIssueService {
     BookIssue findBookIssueHistory(long id);
 
     BookIssue addBookIssue(BookIssue bookIssue);
+
+    void updateBookIssued(long id, BookIssue bookIssue);
 }

@@ -41,31 +41,19 @@ public class BookServiceImpl implements BookService {
 
     public Book addBook(Book books){
 
+
         return bookrepo.save(books);
 
     }
 
    public Book updateBook(long id, Book book){
 
-      /* return bookrepo.findById(id)
-               .map(book1 -> {
-                   book.setISBN(book.getName());
-                   book.setName(book.getName());
-                   book.setAuthorFirstName(book.getAuthorFirstName());
-                   book.setAuthorLastName(book.getAuthorLastName());
-                   return bookrepo.save(book1);
-               })
-               .orElseGet(() -> {
-                   book.setId(id);
-                   return bookrepo.save(book);
-               });*/
         Book book1 = findBookById(id);
 
-        book1.setId(id);
-        book1.setISBN("123");
-        book1.setName("Mani");
-        book1.setAuthorFirstName("sk");
-        book1.setAuthorLastName("df");
+        book1.setISBN(book.getISBN());
+        book1.setName(book.getName());
+        book1.setAuthorFirstName(book.getAuthorFirstName());
+        book1.setAuthorLastName(book.getAuthorFirstName());
 
         return bookrepo.save(book1);
 
@@ -73,18 +61,11 @@ public class BookServiceImpl implements BookService {
 
 
    public Location addLocation(Location location){
+
+
         return  locationRepo.save(location);
    }
 
-
-   public Location updateLocation(long id, Location location){
-        Location location1 = getLocation(id);
-        location1.setRowNum(1L);
-
-        return locationRepo.save(location1);
-
-
-    }
 
     public Book findBookById(Long id){
         Optional<Book> book = bookrepo.findById(id);
@@ -101,17 +82,21 @@ public class BookServiceImpl implements BookService {
         bookrepo.deleteById(id);
     }
 
-    public Location findBookLocation(long id){
+   /* public Location findBookLocation(long id){
         Location location = getLocation(id);
         return location;
 
 
-    }
-   public  Location getLocation(Long id){
+    }*/
+   /*public  Location getLocation(Long id){
         Optional<Location> location = locationRepo.findById(id);
+        if(!location.isPresent()){
+            throw new EntityNotFoundException("Book with id : " + id + " does not exist");
+
+        }
         return  location.get();
 
-   }
+   }*/
 
 
 

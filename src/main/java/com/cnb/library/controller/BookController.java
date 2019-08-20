@@ -2,10 +2,14 @@ package com.cnb.library.controller;
 
 
 import com.cnb.library.dto.BookDTO;
+import com.cnb.library.model.BookIssue;
 import com.cnb.library.model.Location;
 import com.cnb.library.repo.Bookrepo;
+import com.cnb.library.service.BookIssueService;
 import com.cnb.library.service.BookService;
 import com.cnb.library.model.Book;
+import com.cnb.library.service.LocationService;
+import feign.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +29,17 @@ public class BookController  {
 
     private Bookrepo bookrepo;
 
+    private LocationService locationService;
+
+    private BookIssueService bookIssueService;
+
 
     @Autowired
-    public BookController(BookService bookService, Bookrepo bookrepo) {
+    public BookController(BookService bookService, Bookrepo bookrepo, LocationService locationService,BookIssueService bookIssueService) {
             this.bookService = bookService;
             this.bookrepo = bookrepo;
+            this.locationService= locationService;
+            this.bookIssueService=bookIssueService;
 
         }
         @GetMapping(value = "/")
@@ -37,11 +47,6 @@ public class BookController  {
             return bookService.list();
         }
 
-        @GetMapping(value = "{id}/location")
-        public Location getBookLocation (@PathVariable Long id){
-        return bookService.findBookLocation(id);
-
-    }
 
         @PutMapping(value = "/{id}", consumes = "application/json")
         public Book updateBook(@PathVariable long id, @RequestBody Book book){
@@ -49,15 +54,33 @@ public class BookController  {
        return bookService.updateBook(id, book);
         }
 
-        @PutMapping(value = "/{id}/location" )
-        public Location updateLocation (@PathVariable long id ,@RequestBody Location location){
-               return bookService.updateLocation(id, location);
+     @GetMapping(value = "{id}/location")
+     public Location getBookLocation (@PathVariable Long id){
+        return locationService.findBookLocation(id);
+
+      }
+
+     @PutMapping(value = "/{bookId}/location", consumes = "application/json")
+      public void updateLocation (@PathVariable Long bookId ,@RequestBody Location location){
+        locationService.updateLocation(bookId, location);
+        }
+
+        @GetMapping(value = "{id}/bookIssue")
+       public BookIssue getBookIssueHistory(@PathVariable Long id){
+        return bookIssueService.findBookIssueHistory(id);
     }
 
-        @DeleteMapping(value = "/{id}")
-        public void deleteBook ( long id){
+     @PutMapping(value = "/{id}/bookIssue")
+      public void updateBookIssued(@PathVariable Long id, @RequestBody BookIssue bookIssue){
+        logger.info("bookIssued updated"+bookIssue);
+        bookIssueService.updateBookIssued(id,bookIssue);
+
+    }
+
+     @DeleteMapping(value = "/{id}")
+     public void deleteBook ( long id){
             bookService.removeBook(id);
         }
 
 
-}
+ }

@@ -29,12 +29,15 @@ public class Book {
 //    private Author author;
 
     private Status status;
-@OneToOne
-@JoinColumn(name = "location_id")
-private Location location;
 
-@OneToOne(mappedBy = "book")
-private BookIssue bookIssue;
+    @OneToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
+
+
+    @OneToOne
+    @JoinColumn(name = "bookIssue_id")
+    private BookIssue bookIssue;
 
     @Builder
     public Book(String ISBN, String name, String authorFirstName, String authorLastName, Status status, Location location, BookIssue bookIssue) {

@@ -4,6 +4,7 @@ import com.cnb.library.dto.BookDTO;
 import com.cnb.library.model.Book;
 import com.cnb.library.model.Location;
 import org.springframework.http.ResponseEntity;
+import sun.jvm.hotspot.types.basic.BasicOopField;
 
 public interface BookService {
 
@@ -13,13 +14,11 @@ Book addBook(Book books);
 
 Book updateBook(long id, Book book);
 
-Location updateLocation(long id, Location location);
-
 void removeBook(long id);
 
-Location findBookLocation(long id);
-
 Location addLocation(Location location);
+
+Book findBookById(Long id);
 
 
 

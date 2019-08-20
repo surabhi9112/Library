@@ -20,19 +20,21 @@ public class Location {
     private Long rowNum;
     private Long columnNum;
 
+
     @OneToOne(mappedBy = "location")
     private Book book;
 
 
-    @Builder
 
+   /* @Builder
     public Location( Long shelfNum, Long rowNum, Long columnNum, Book book) {
         this.shelfNum=shelfNum;
         this.rowNum=rowNum;
         this.columnNum=columnNum;
         this.book=book;
+*/
 
-    }
+
 
 
 }

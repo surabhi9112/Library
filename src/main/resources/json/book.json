@@ -1,15 +1,16 @@
-
-  {
-    "id": 1,
-    "isbn": "12jh",
-    "name": "Henry Smith",
-    "authorFirstName": "surabhi",
-    "authorLastName": "Sharma",
-    "status": "AVAILABLE",
-    "location": {
-      "id": 1
-    }
+{
+  "isbn": "12jh",
+  "name": "Henry Smith",
+  "authorFirstName": "surabhi",
+  "authorLastName": "Sharma",
+  "status": "AVAILABLE",
+  "location":{
+    "id":1
+  },
+  "bookIssue":{
+    "id":1
   }
+}
 
 
 
