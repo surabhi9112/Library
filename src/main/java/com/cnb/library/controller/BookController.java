@@ -70,10 +70,13 @@ public class BookController  {
         return bookIssueService.findBookIssueHistory(id);
     }
 
-     @PutMapping(value = "/{id}/bookIssue")
-      public void updateBookIssued(@PathVariable Long id, @RequestBody BookIssue bookIssue){
-        logger.info("bookIssued updated"+bookIssue);
-        bookIssueService.updateBookIssued(id,bookIssue);
+     @PutMapping(value = "/bookIssue", consumes = "application/json")
+      public void updateBookIssued(@RequestBody BookIssue bookIssue){
+
+        logger.info("Request Received for  book issue update , book issue id is {} ", bookIssue.getId());
+        long bookId = bookIssue.getBook().getId();
+        bookIssueService.updateBookIssued(bookId,bookIssue);
+        logger.info("Book issue updated successfully for id {} ", bookIssue.getId());
 
     }
 
